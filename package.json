@@ -305,7 +305,8 @@
   "browser": {
     "debug": "./lib/browser/debug.js",
     "events": "./lib/browser/events.js",
-    "tty": "./lib/browser/tty.js"
+    "tty": "./lib/browser/tty.js",
+    "./lib/reporters/index.js": "./lib/zuul/reporters.js"
   },
   "licenses": [
     {

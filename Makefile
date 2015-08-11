@@ -6,7 +6,7 @@ TM_BUNDLE = JavaScript\ mocha.tmbundle
 SRC = $(shell find lib -name "*.js" -type f | sort)
 SUPPORT = $(wildcard support/*.js)
 
-all: mocha.js
+all: mocha.js zuul.js
 
 mocha.js: $(SRC) $(SUPPORT)
 	@$(BROWSERIFY) ./support/browser-entry \
@@ -17,8 +17,18 @@ mocha.js: $(SRC) $(SUPPORT)
 		--ignore 'supports-color' \
 		--exclude './lib-cov/mocha' > $@
 
+zuul.js: $(SRC) $(SUPPORT)
+	@$(BROWSERIFY) ./support/zuul-entry \
+		--ignore 'fs' \
+		--ignore 'glob' \
+		--ignore 'jade' \
+		--ignore 'path' \
+		--ignore 'supports-color' \
+		--exclude './lib-cov/mocha' > $@
+
 clean:
 	rm -f mocha.js
+	rm -f zuul.js
 	rm -rf test-outputs
 	rm -fr lib-cov
 	rm -f coverage.html
